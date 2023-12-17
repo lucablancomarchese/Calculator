@@ -33,7 +33,7 @@ struct ContentView: View {
     
     let buttons: [[CalcButton]] = [
         
-        [.negative, .clear, .clearAll, .add],
+        [.clear, .clearAll, .negative, .add],
         [.seven, .eight, .nine, .subtract],
         [.four, .five, .six, .multiply],
         [.one, .two, .three, .divide,],
@@ -50,13 +50,13 @@ struct ContentView: View {
             HStack {
                 Spacer()
                 Text("0")
-                    .font(.system(size: 52))
-                    .bold()
+                    .font(.system(size: 70))
+                    
             }
             .padding()
             
             //display Buttons
-            Spacer()
+            //Spacer()
             
             ForEach(buttons, id: \.self) { row in
                 HStack {
@@ -66,10 +66,10 @@ struct ContentView: View {
                             
                             Text(item.rawValue)
                                 .font(.system(size: 30))
-                                .frame(width: buttonSize(for: item), height: 70)
+                                .frame(width: buttonSize(for: item), height: 80)
                                 .background(buttonBackgroundColor(for: item))
                                 .foregroundColor(.white)
-                                .cornerRadius(35)
+                                .cornerRadius(45)
                         })
                         
                     }
@@ -97,8 +97,6 @@ func buttonBackgroundColor(for item: CalcButton) -> Color {
         return Color.gray
     case "=":
         return Color.gray
-    case ",":
-        return Color.gray
     default:
         return Color.orange
     }
@@ -107,9 +105,9 @@ func buttonBackgroundColor(for item: CalcButton) -> Color {
 func buttonSize(for item: CalcButton) -> Double {
     switch item.rawValue {
     case "0":
-        return 150
+        return 160
     default:
-        return 70
+        return 80
     }
 }
                                    

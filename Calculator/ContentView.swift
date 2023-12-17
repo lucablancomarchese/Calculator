@@ -32,14 +32,21 @@ enum CalcButton: String {
 struct ContentView: View {
     
     let buttons: [[CalcButton]] = [
-        [.seven, .eight, .nine],
-        [.four, .five, .six],
-        [.one, .two, .three],]
+        
+        [.negative, .clear, .clearAll, .add],
+        [.seven, .eight, .nine, .subtract],
+        [.four, .five, .six, .multiply],
+        [.one, .two, .three, .divide,],
+        [.zero, .decimal, .equal],
+    ]
+    
+    
     
     var body: some View {
         VStack {
             
             //display Text
+            Spacer()
             HStack {
                 Spacer()
                 Text("0")
@@ -49,30 +56,64 @@ struct ContentView: View {
             .padding()
             
             //display Buttons
+            Spacer()
             
-                ForEach(buttons, id: \.self) { row in
-                    HStack {
-                        ForEach(row, id: \.self) { item in
-                            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/,
-                                   label: {
-                                Text(item.rawValue)
-                                    .font(.system(size: 30))
-                                    .frame(width: 70, height: 70)
-                                    .background(Color.orange)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(35)
-                            })
+            ForEach(buttons, id: \.self) { row in
+                HStack {
+                    ForEach(row, id: \.self) { item in
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/,
+                               label: {
                             
-                        }
+                            Text(item.rawValue)
+                                .font(.system(size: 30))
+                                .frame(width: buttonSize(for: item), height: 70)
+                                .background(buttonBackgroundColor(for: item))
+                                .foregroundColor(.white)
+                                .cornerRadius(35)
+                        })
+                        
                     }
                 }
-            
-            
+            }
             
         }
         .padding()
     }
 }
+
+func buttonBackgroundColor(for item: CalcButton) -> Color {
+    switch item.rawValue {
+    case "AC":
+        return Color.red
+    case "C":
+        return Color.red
+    case "+":
+        return Color.gray
+    case "-":
+        return Color.gray
+    case "/":
+        return Color.gray
+    case "x":
+        return Color.gray
+    case "=":
+        return Color.gray
+    case ",":
+        return Color.gray
+    default:
+        return Color.orange
+    }
+}
+
+func buttonSize(for item: CalcButton) -> Double {
+    switch item.rawValue {
+    case "0":
+        return 150
+    default:
+        return 70
+    }
+}
+                                   
+                                   
 
 #Preview {
     ContentView()
